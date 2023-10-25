@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jewllery_app/view/widgets/custom_button.dart';
+import 'package:jewllery_app/view/widgets/custom_button_social.dart';
 // import 'package:jewelry_app/view/widgets/custom_text.dart';
 import 'package:jewllery_app/view/widgets/custom_text.dart';
+import 'package:jewllery_app/view/widgets/custom_text_form_field.dart';
 
 import '../constance.dart';
 
 class LoginScreen extends StatelessWidget {
+  get controller => null;
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -26,36 +31,36 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: 10),
             CustomText(text: 'Sign in to Continue', fontSize: 14, color: Colors.grey,),
             SizedBox(height: 30),
-            Column(
-              children: [
-                CustomText(text: 'Email', fontSize: 14, color: Colors.grey.shade900,),
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'example@email.com',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    fillColor: Colors.white,
-                  ),
-                ),
-              ],
-            ),
+            CustomTextFormField('Email', 'example@email.com', (value){}, (value){}),
             SizedBox(height: 20),  // Add some spacing between the email and password fields
-            Column(
-              children: [
-                CustomText(text: 'Password', fontSize: 14, color: Colors.grey.shade900,),
-                TextFormField(
-                  obscureText: true,  // This will hide the entered password
-                  decoration: InputDecoration(
-                    hintText: 'Your Password',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    fillColor: Colors.white,
-                  ),
-                ),
-              ],
+            CustomTextFormField('Password', '******************', (p0) { }, (p0) => null),
+            SizedBox(height: 20,),
+            CustomText(text: 'Forgot Password', fontSize: 14,alignment: Alignment.topRight,),
+            SizedBox(height: 20,),
+            CustomButton('SIGN IN', () { }),
+            SizedBox(
+              height: 40,
             ),
+            CustomText(text: '-OR-',
+              alignment: Alignment.center,),
+            SizedBox(height: 20,),
+            CustomButtonSocial(
+              text: 'Sign In with Facebook',
+              onPress: () {
+                controller.facebookSignInMethod();
+              },
+              imageName: 'assets/images/facebook.png',
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            CustomButtonSocial(
+              text: 'Sign In Google',
+              onPress: () {
+                controller.facebookSignInMethod();
+              },
+              imageName: 'assets/images/google.png',
+            )
           ],
         ),
       ),
