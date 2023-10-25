@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
 
-const primaryColor = Color.fromRGBO(0, 197, 105, 1);
+const primaryColor = Color(0xFFFFD700); // Use the hexadecimal representation for gold

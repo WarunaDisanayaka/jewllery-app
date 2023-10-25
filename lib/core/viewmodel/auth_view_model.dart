@@ -45,5 +45,13 @@ class AuthViewModel extends GetxController{
             Get.snackbar('Error login account', e.toString(),colorText: Colors.black,snackPosition: SnackPosition.BOTTOM);
         }
   }
-
+  void createAccountWithEmailAndPassword()async{
+    try{
+      await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      Get.offAll(HomeView());
+    }catch(e){
+      print(e.toString());
+      Get.snackbar('Error login account', e.toString(),colorText: Colors.black,snackPosition: SnackPosition.BOTTOM);
+    }
+  }
 }
