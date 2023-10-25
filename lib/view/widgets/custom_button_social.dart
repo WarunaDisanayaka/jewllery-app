@@ -15,36 +15,42 @@ class CustomButtonSocial extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(11),
-        color: Colors.grey.shade50,
-      ),
-      child: ElevatedButton(
-        onPressed: () {
-          onPress(); // Call the onPress function here
-        },
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+    return Center( // Center widget added here
+      child: Align( // Align widget added here
+        alignment: Alignment.centerRight, // Align to the right
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(11),
+            color: Colors.grey.shade50,
           ),
-          padding: EdgeInsets.zero, // Remove the default padding
-          alignment: Alignment.center, // Center the content
-          elevation: 0, // Remove the default elevation
-          primary: Colors.transparent, // Set the background color to transparent
-          onSurface: Colors.transparent, // Set the surface color to transparent
-          onPrimary: Colors.transparent, // Set the primary color to transparent
-        ),
-        child: Row(
-          children: [
-            Image.asset(imageName),
-            SizedBox(
-              width: 100,
+          child: ElevatedButton(
+            onPressed: () {
+              onPress();
+            },
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              padding: EdgeInsets.zero,
+              alignment: Alignment.center,
+              elevation: 0,
+              primary: Colors.transparent,
+              onSurface: Colors.transparent,
+              onPrimary: Colors.transparent,
             ),
-            CustomText(
-              text: text,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(imageName),
+                SizedBox(
+                  width: 40,
+                ),
+                CustomText(
+                  text: text,
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
