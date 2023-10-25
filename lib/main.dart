@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jewllery_app/view/control_view.dart';
 import 'package:jewllery_app/view/login_screen.dart';
 
 import 'helper/binding.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       initialBinding: Binding(),
       home: Scaffold(
-      body: LoginScreen(),
+      body: ControlView(),
       ),
     );
   }
