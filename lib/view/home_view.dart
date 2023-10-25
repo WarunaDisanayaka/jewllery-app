@@ -4,49 +4,66 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jewllery_app/constance.dart';
 import 'package:jewllery_app/core/viewmodel/home_view_model.dart';
+import 'package:jewllery_app/view/cart_view.dart';
 import 'package:jewllery_app/view/login_view.dart';
 import 'package:jewllery_app/view/widgets/custom_text.dart';
 
-class HomeView extends StatelessWidget{
-  final List<String> names = <String>['s','s','s','s','s'];
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  Widget build(BuildContext context){
+class HomeView extends StatelessWidget {
+  final List<String> names = <String>['s', 's', 's', 's', 's'];
 
-
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(top: 100,left: 20,right: 20 ),
-        child: Column(
-          children: [
-            _searchTextFormField(),
-            SizedBox(height: 40,),
-            CustomText(
-              text: "Categories",
-            ),
-            SizedBox(height: 20,),
-            _listViewCategory(),
-            SizedBox(height: 30,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 70), // Add padding to push the search bar down
+            child: _searchTextFormField(),
+          ),
+          Expanded(
+            child: ListView(
               children: [
-              CustomText(
-                text:"Best Selling",
-                fontSize:18,),
-              CustomText(
-                text: "See all",
-                fontSize: 18,
-              ),
-            //   Logout button can place here
-
-            ],
+                SizedBox(height: 40),
+                CustomText(
+                  text: "Categories",
+                ),
+                SizedBox(height: 20),
+                _listViewCategory(),
+                SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      text: "Best Selling",
+                      fontSize: 18,
+                    ),
+                    CustomText(
+                      text: "See all",
+                      fontSize: 18,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 25),
+                _listViewProduct(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      text: "Best Selling",
+                      fontSize: 18,
+                    ),
+                    CustomText(
+                      text: "See all",
+                      fontSize: 18,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 25),
+                _listViewProduct(),
+              ],
             ),
-            SizedBox(height: 25,),
-            _listViewProduct(),
-          ],
-        ),
+          ),
+        ],
       ),
-      bottomNavigationBar: bottomNavigationBar(),
-      // body: Center(child: ElevatedButton(onPressed:(){_auth.signOut();Get.offAll(LoginView());} , child: Text("Logout"),),),
     );
   }
 
@@ -58,14 +75,14 @@ class HomeView extends StatelessWidget{
       ),
       child: TextFormField(
         decoration: InputDecoration(
-            border: InputBorder.none,
-            prefixIcon: Icon(Icons.search,color: Colors.black,)
+          border: InputBorder.none,
+          prefixIcon: Icon(Icons.search, color: Colors.black),
         ),
       ),
     );
   }
 
-  Widget _listViewCategory(){
+  Widget _listViewCategory() {
     return Container(
       height: 100,
       child: ListView.separated(
@@ -86,18 +103,19 @@ class HomeView extends StatelessWidget{
                   child: Image.asset('assets/images/Icon_Mens Shoe.png'),
                 ),
               ),
-              SizedBox(height: 20,),
-              CustomText(text: names[index],)
+              SizedBox(height: 20),
+              CustomText(text: names[index]),
             ],
           );
-        }, separatorBuilder: ( context, index)=> SizedBox(
-        width: 20,
-      ),
+        },
+        separatorBuilder: (context, index) => SizedBox(
+          width: 20,
+        ),
       ),
     );
   }
 
-  Widget _listViewProduct(){
+  Widget _listViewProduct() {
     return Container(
       height: 200,
       child: ListView.separated(
@@ -105,7 +123,7 @@ class HomeView extends StatelessWidget{
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Container(
-            width: MediaQuery.of(context).size.width *.3,
+            width: MediaQuery.of(context).size.width * .3,
             child: Column(
               children: [
                 Container(
@@ -116,11 +134,13 @@ class HomeView extends StatelessWidget{
                   child: Column(
                     children: [
                       Container(
-                        height:140,
-                          width: MediaQuery.of(context).size.width *.4,
-                          child: Image.asset('assets/images/Image.png',
+                        height: 140,
+                        width: MediaQuery.of(context).size.width * .4,
+                        child: Image.asset(
+                          'assets/images/Image.png',
                           fit: BoxFit.fill,
-                          )),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -137,70 +157,23 @@ class HomeView extends StatelessWidget{
                   color: Colors.grey,
                   alignment: Alignment.bottomLeft,
                   fontSize: 12,
-
                 ),
                 CustomText(
                   text: "\$75",
                   alignment: Alignment.bottomLeft,
                   fontSize: 16,
                   color: primaryColor,
-                )
+                ),
               ],
             ),
           );
-        }, separatorBuilder: ( context, index)=> SizedBox(
-        width: 20,
-      ),
-      ),
-    );
-  }
-
- Widget bottomNavigationBar(){
-    return GetBuilder<HomeViewModel>(
-      init: HomeViewModel(),
-      builder: (controller)=>BottomNavigationBar(
-          items:[
-           BottomNavigationBarItem(
-             activeIcon: Padding(
-               padding: const EdgeInsets.only(top: 25.0),
-               child: Text("Explore"),
-             ),
-             label: '',
-               icon: Padding(
-                 padding: const EdgeInsets.only(top: 20),
-                 child: Image.asset(
-             'assets/images/Icon_Explore.png',
-             fit: BoxFit.contain,
-             width: 20,
-           ),
-               )),
-            BottomNavigationBarItem(
-                activeIcon: Text("Cart"),
-                label: '',
-                icon: Image.asset(
-                  'assets/images/Icon_Cart.png',
-                  fit: BoxFit.contain,
-                  width: 20,
-                )),
-            BottomNavigationBarItem(
-                activeIcon: Text("Account"),
-                label: '',
-                icon: Image.asset(
-                  'assets/images/Icon_User.png',
-                  fit: BoxFit.contain,
-                  width: 20,
-                ))
-
-            ],
-        currentIndex: controller.navigatorValue,
-        onTap: (index)=>controller.changeSelectedValue(index),
-        elevation: 0,
-        selectedItemColor: Colors.black,
-        backgroundColor: Colors.grey.shade50,
+        },
+        separatorBuilder: (context, index) => SizedBox(
+          width: 20,
+        ),
       ),
     );
   }
-
 }
 
 

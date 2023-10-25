@@ -69,22 +69,22 @@ class LoginView extends GetWidget<AuthViewModel> {
               SizedBox(height: 40),
               CustomText(text: '-OR-', alignment: Alignment.center,),
               SizedBox(height: 20),
-              CustomButtonSocial(
-                text: 'Sign In with Facebook',
-                onPress: () {
-                  // Handle Facebook sign-in here
-                },
-                imageName: 'assets/images/facebook.png',
-              ),
+              // CustomButtonSocial(
+              //   text: 'Sign In with Facebook',
+              //   onPress: () {
+              //     // Handle Facebook sign-in here
+              //   },
+              //   imageName: 'assets/images/facebook.png',
+              // ),
               SizedBox(height: 40),
-              CustomButtonSocial(
-                text: 'Sign In Google',
-                onPress: () {
-                  // Handle Google sign-in here
-                  controller.googleSignInMethod();
-                },
-                imageName: 'assets/images/google.png',
-              )
+              // CustomButtonSocial(
+              //   text: 'Sign In Google',
+              //   onPress: () {
+              //     // Handle Google sign-in here
+              //     controller.googleSignInMethod();
+              //   },
+              //   imageName: 'assets/images/google.png',
+              // )
             ],
           ),
         ),
