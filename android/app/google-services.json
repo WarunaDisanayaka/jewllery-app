@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "670508785794",
+    "project_id": "jewlery-app",
+    "storage_bucket": "jewlery-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:670508785794:android:4762a356d4607a2a63949b",
+        "android_client_info": {
+          "package_name": "com.example.jewllery_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlkU2ZHAadZrjZkNucxaZf5wSQWhfpToE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
