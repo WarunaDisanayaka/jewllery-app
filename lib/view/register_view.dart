@@ -43,7 +43,7 @@ class RegisterView extends GetWidget<AuthViewModel>{
 
               SizedBox(height: 30),
               CustomTextFormField('Name', 'Pera', (value){
-                controller.email =value!;
+                controller.name =value!;
               }, (value){
                 if(value==null){
                   print("Error");

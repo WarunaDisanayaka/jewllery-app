@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:jewllery_app/core/service/FireStoreUser.dart';
+import 'package:jewllery_app/model/user_model.dart';
 import 'package:jewllery_app/view/home_view.dart';
 
 
@@ -47,7 +49,14 @@ class AuthViewModel extends GetxController{
   }
   void createAccountWithEmailAndPassword()async{
     try{
-      await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      await _auth.createUserWithEmailAndPassword(email: email, password: password).then((user) async {
+        await FireStoreUser().addUserToFireStore(UserModel(
+          userId:user.user!.uid,
+          email: user.user?.email ?? '', // Use an empty string as a default value if email is null
+          name:name,
+          pic:'',
+        ));
+      });
       Get.offAll(HomeView());
     }catch(e){
       print(e.toString());
