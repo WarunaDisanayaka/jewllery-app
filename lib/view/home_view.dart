@@ -106,59 +106,61 @@ class HomeView extends StatelessWidget{
   }
 
   Widget _listViewProduct(){
-    return Container(
-      height: 200,
-      child: ListView.separated(
-        itemCount: names.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Container(
-            width: MediaQuery.of(context).size.width *.3,
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.grey.shade100,
+    return GetBuilder<HomeViewModel>(
+      builder:(controller)=> Container(
+        height: 200,
+        child: ListView.separated(
+          itemCount: controller.productModel.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return Container(
+              width: MediaQuery.of(context).size.width *.3,
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.grey.shade100,
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          height:140,
+                            width: MediaQuery.of(context).size.width *.4,
+                            child: Image.network(controller.productModel[index].image,
+                            fit: BoxFit.fill,
+                            )),
+                      ],
+                    ),
                   ),
-                  child: Column(
-                    children: [
-                      Container(
-                        height:140,
-                          width: MediaQuery.of(context).size.width *.4,
-                          child: Image.asset('assets/images/Image.png',
-                          fit: BoxFit.fill,
-                          )),
-                    ],
+                  CustomText(
+                    text: controller.productModel[index].name,
+                    alignment: Alignment.bottomLeft,
+                    fontSize: 14,
                   ),
-                ),
-                CustomText(
-                  text: "Mens watch",
-                  alignment: Alignment.bottomLeft,
-                  fontSize: 16,
-                ),
-                SizedBox(
-                  height: 3,
-                ),
-                CustomText(
-                  text: "Mens watch",
-                  color: Colors.grey,
-                  alignment: Alignment.bottomLeft,
-                  fontSize: 12,
+                  SizedBox(
+                    height: 3,
+                  ),
+                  CustomText(
+                    text: controller.productModel[index].description,
+                    color: Colors.grey,
+                    alignment: Alignment.bottomLeft,
+                    fontSize: 12,
 
-                ),
-                CustomText(
-                  text: "\$75",
-                  alignment: Alignment.bottomLeft,
-                  fontSize: 16,
-                  color: primaryColor,
-                )
-              ],
-            ),
-          );
-        }, separatorBuilder: ( context, index)=> SizedBox(
-        width: 20,
-      ),
+                  ),
+                  CustomText(
+                    text:'Rs '+ controller.productModel[index].price,
+                    alignment: Alignment.bottomLeft,
+                    fontSize: 16,
+                    color: primaryColor,
+                  )
+                ],
+              ),
+            );
+          }, separatorBuilder: ( context, index)=> SizedBox(
+          width: 20,
+        ),
+        ),
       ),
     );
   }
