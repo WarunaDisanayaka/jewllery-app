@@ -1,19 +1,15 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
 import '../../view/cart_view.dart';
 import '../../view/home_view.dart';
 import '../../view/profile_view.dart';
 
 class ControlViewModel extends GetxController{
   int _navigatorValue = 0;
-
-  get navigatorValue=>_navigatorValue;
-
   Widget _currentScreen = HomeView();
 
-  get currentScreen=>_currentScreen;
+  int get navigatorValue=>_navigatorValue;
+  Widget get currentScreen=>_currentScreen;
 
   void changeSelectedValue(int selectedValue){
     _navigatorValue = selectedValue;
