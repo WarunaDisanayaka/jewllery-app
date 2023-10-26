@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 import 'package:jewllery_app/core/viewmodel/auth_view_model.dart';
 import 'package:jewllery_app/view/login_view.dart';
 
-import '../core/viewmodel/home_view_model.dart';
+import '../core/viewmodel/control_view_model.dart';
 
 class ControlView extends GetWidget<AuthViewModel>{
   Widget build(BuildContext context){
     return Obx((){
       return(Get.find<AuthViewModel>().user ==null)
           ?LoginView()
-          :GetBuilder<HomeViewModel>(
+          :GetBuilder<ControlViewModel>(
           builder: (controller)=>Scaffold(
             body: controller.currentScreen,
             bottomNavigationBar: bottomNavigationBar(),
@@ -20,8 +20,8 @@ class ControlView extends GetWidget<AuthViewModel>{
     });
   }
   Widget bottomNavigationBar(){
-    return GetBuilder<HomeViewModel>(
-      init: HomeViewModel(),
+    return GetBuilder<ControlViewModel>(
+      init: ControlViewModel(),
       builder: (controller)=>BottomNavigationBar(
         items:[
           BottomNavigationBarItem(

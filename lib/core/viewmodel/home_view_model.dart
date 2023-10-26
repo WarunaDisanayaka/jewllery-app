@@ -1,35 +1,38 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:jewllery_app/view/cart_view.dart';
-import 'package:jewllery_app/view/home_view.dart';
-import 'package:jewllery_app/view/profile_view.dart';
+import 'package:jewllery_app/core/service/home_services.dart';
+import 'package:jewllery_app/core/viewmodel/control_view_model.dart';
+
+import '../../model/category_model.dart';
 
 class HomeViewModel extends GetxController{
-  int _navigatorValue = 0;
 
-  get navigatorValue=>_navigatorValue;
+  ValueNotifier<bool> get loading=>_loading;
+  ValueNotifier<bool> _loading = ValueNotifier(false);
 
-  Widget _currentScreen = HomeView();
+  List<CategoryModel> get categoryModel => _categoryModel;
+  List<CategoryModel> _categoryModel = [];
 
-  get currentScreen => _currentScreen;
 
-  void changeSelectedValue(int selectedValue){
-    _navigatorValue = selectedValue;
-    switch(selectedValue){
-      case 0:{
-        _currentScreen = HomeView();
-        break;
+
+  // final ControlViewModel _controlViewModel = ControlViewModel(); // Create an instance of HomeViewModel
+
+
+  HomeViewModel(){
+    getCategory();
+  }
+
+  getCategory() async {
+    _loading.value = true;
+    HomeService().getCategory().then((value) {
+      for (int i = 0; i < value.length; i++) {
+        final categoryData = value[i].data() as Map<String, dynamic>;
+        _categoryModel.add(CategoryModel.fromJson(categoryData));
+        print(_categoryModel.length);
+        _loading.value = false;
       }
-      case 1:{
-        _currentScreen = CartView();
-        break;
-      }
-      case 2:{
-        _currentScreen = ProfileView();
-        break;
-      }
-    }
-    update();
-
+      update();
+    });
   }
 }
