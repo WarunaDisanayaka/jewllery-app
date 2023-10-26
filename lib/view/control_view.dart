@@ -6,7 +6,7 @@ import 'package:jewllery_app/view/home_view.dart';
 import 'package:jewllery_app/view/login_view.dart';
 import 'package:jewllery_app/view/profile_view.dart';
 
-import '../core/viewmodel/home_view_model.dart';
+import '../core/viewmodel/control_view_model.dart';
 import 'cart_view.dart';
 
 class ControlView extends GetWidget<AuthViewModel>{
@@ -16,8 +16,8 @@ class ControlView extends GetWidget<AuthViewModel>{
     return Obx((){
       return(Get.find<AuthViewModel>().user ==null)
           ?LoginView()
-          :GetBuilder<HomeViewModel>(
-            builder: (HomeViewModel controller)=>Scaffold(
+          :GetBuilder<ControlViewModel>(
+            builder: (ControlViewModel controller)=>Scaffold(
         body:controller.currentScreen,
         bottomNavigationBar: bottomNavigationBar(),
       ),
@@ -25,8 +25,8 @@ class ControlView extends GetWidget<AuthViewModel>{
     });
   }
   Widget bottomNavigationBar(){
-    return GetBuilder<HomeViewModel>(
-      init: HomeViewModel(),
+    return GetBuilder<ControlViewModel>(
+      init: ControlViewModel(),
       builder: (controller)=>BottomNavigationBar(
         items:[
           BottomNavigationBarItem(

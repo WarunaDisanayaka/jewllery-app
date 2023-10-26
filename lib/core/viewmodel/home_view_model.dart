@@ -1,37 +1,28 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
-import '../../view/cart_view.dart';
-import '../../view/home_view.dart';
-import '../../view/profile_view.dart';
+import '../../model/category_model.dart';
 
 class HomeViewModel extends GetxController{
-  int _navigatorValue = 0;
 
-  get navigatorValue=>_navigatorValue;
+  List<CategoryModel> get categoryModel => _categoryModel;
+  List<CategoryModel> _categoryModel = [];
 
-  Widget _currentScreen = HomeView();
+  final CollectionReference _categoryCollectionRef = FirebaseFirestore.instance.collection('Categories');
 
-  get currentScreen=>_currentScreen;
-
-  void changeSelectedValue(int selectedValue){
-    _navigatorValue = selectedValue;
-    switch(selectedValue){
-      case 0:{
-        _currentScreen = HomeView();
-        break;
-      }
-      case 1:{
-        _currentScreen = CartView();
-        break;
-      }
-      case 2:{
-        _currentScreen = ProfileView();
-        break;
-      }
-
-    }
-    update();
+  HomeViewModel(){
+    getCategory();
   }
+
+  getCategory()async{
+    _categoryCollectionRef.get().then((value) {
+      for (int i = 0; i < value.docs.length; i++) {
+        _categoryModel.add(CategoryModel.fromJson(value.docs[i].data() as Map<String, dynamic>));
+        print(_categoryModel.length);
+      }
+      update();
+    });
+  }
+
 }

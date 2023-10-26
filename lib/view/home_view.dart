@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jewllery_app/constance.dart';
+import 'package:jewllery_app/core/viewmodel/control_view_model.dart';
 import 'package:jewllery_app/core/viewmodel/home_view_model.dart';
 import 'package:jewllery_app/view/cart_view.dart';
 import 'package:jewllery_app/view/login_view.dart';
@@ -12,57 +13,59 @@ class HomeView extends StatelessWidget {
   final List<String> names = <String>['s', 's', 's', 's', 's'];
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 70), // Add padding to push the search bar down
-            child: _searchTextFormField(),
-          ),
-          Expanded(
-            child: ListView(
-              children: [
-                SizedBox(height: 40),
-                CustomText(
-                  text: "Categories",
-                ),
-                SizedBox(height: 20),
-                _listViewCategory(),
-                SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(
-                      text: "Best Selling",
-                      fontSize: 18,
-                    ),
-                    CustomText(
-                      text: "See all",
-                      fontSize: 18,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 25),
-                _listViewProduct(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(
-                      text: "Best Selling",
-                      fontSize: 18,
-                    ),
-                    CustomText(
-                      text: "See all",
-                      fontSize: 18,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 25),
-                _listViewProduct(),
-              ],
+    return GetBuilder<HomeViewModel>(
+      builder:(controller)=> Scaffold(
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 70), // Add padding to push the search bar down
+              child: _searchTextFormField(),
             ),
-          ),
-        ],
+            Expanded(
+              child: ListView(
+                children: [
+                  SizedBox(height: 40),
+                  CustomText(
+                    text: "Categories",
+                  ),
+                  SizedBox(height: 20),
+                  _listViewCategory(),
+                  SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        text: "Best Selling",
+                        fontSize: 18,
+                      ),
+                      CustomText(
+                        text: "See all",
+                        fontSize: 18,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 25),
+                  _listViewProduct(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        text: "Best Selling",
+                        fontSize: 18,
+                      ),
+                      CustomText(
+                        text: "See all",
+                        fontSize: 18,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 25),
+                  _listViewProduct(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
