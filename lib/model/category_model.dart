@@ -1,21 +1,20 @@
-class CategoryModel{
-  late String name,image;
+class CategoryModel {
+late String name, image;
 
-  CategoryModel({required this.name,required this.image});
+  CategoryModel({required this.name, required this.image});
 
-  CategoryModel.fromJson(Map<dynamic,dynamic>map){
-    if(map == null){
+  CategoryModel.fromJson(Map<dynamic, dynamic> map) {
+    if (map == null) {
       return;
     }
     name = map['name'];
-    image  = map['image'];
+    image = map['image'];
   }
 
-  toJson(){
+  toJson() {
     return {
-      'name':name,
-      'image':image
+      'name': name,
+      'image': image,
     };
   }
-
 }
