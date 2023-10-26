@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:jewllery_app/core/service/home_services.dart';
 import 'package:jewllery_app/core/viewmodel/control_view_model.dart';
+import 'package:jewllery_app/model/product_model.dart';
 
 import '../../model/category_model.dart';
 
@@ -14,13 +15,12 @@ class HomeViewModel extends GetxController{
   List<CategoryModel> get categoryModel => _categoryModel;
   List<CategoryModel> _categoryModel = [];
 
-
-
-  // final ControlViewModel _controlViewModel = ControlViewModel(); // Create an instance of HomeViewModel
-
+  List<ProductModel> get productModel => _productModel;
+  List<ProductModel> _productModel = [];
 
   HomeViewModel(){
     getCategory();
+    getBestSellingProducts();
   }
 
   getCategory() async {
@@ -29,8 +29,22 @@ class HomeViewModel extends GetxController{
       for (int i = 0; i < value.length; i++) {
         final categoryData = value[i].data() as Map<String, dynamic>;
         _categoryModel.add(CategoryModel.fromJson(categoryData));
-        print(_categoryModel.length);
+        // print(_categoryModel.length);
         _loading.value = false;
+      }
+      update();
+    });
+  }
+
+  getBestSellingProducts ()async {
+    _loading.value =true;
+    HomeService().getBestSelling().then((value){
+      for(int i=0; i < value.length; i++){
+        final productData = value[i].data() as Map<String, dynamic>;
+        _productModel.add(ProductModel.fromJson(productData));
+        _loading.value =false;
+        print(_productModel.length);
+
       }
       update();
     });
