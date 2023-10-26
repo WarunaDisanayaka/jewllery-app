@@ -4,15 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jewllery_app/constance.dart';
 import 'package:jewllery_app/core/viewmodel/home_view_model.dart';
-import 'package:jewllery_app/view/login_view.dart';
 import 'package:jewllery_app/view/widgets/custom_text.dart';
 
 class HomeView extends StatelessWidget{
   final List<String> names = <String>['s','s','s','s','s'];
   FirebaseAuth _auth = FirebaseAuth.instance;
   Widget build(BuildContext context){
-
-
     return Scaffold(
       body: Container(
         padding: EdgeInsets.only(top: 100,left: 20,right: 20 ),
@@ -45,7 +42,6 @@ class HomeView extends StatelessWidget{
           ],
         ),
       ),
-      bottomNavigationBar: bottomNavigationBar(),
       // body: Center(child: ElevatedButton(onPressed:(){_auth.signOut();Get.offAll(LoginView());} , child: Text("Logout"),),),
     );
   }
