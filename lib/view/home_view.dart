@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:jewllery_app/constance.dart';
 import 'package:jewllery_app/core/viewmodel/control_view_model.dart';
 import 'package:jewllery_app/core/viewmodel/home_view_model.dart';
+import 'package:jewllery_app/view/details_view.dart';
 import 'package:jewllery_app/view/widgets/custom_text.dart';
 
 class HomeView extends StatelessWidget{
@@ -20,35 +21,37 @@ class HomeView extends StatelessWidget{
       builder: (controller)=>controller.loading.value
           ?CircularProgressIndicator()
           :Scaffold(
-        body: Container(
-          padding: EdgeInsets.only(top: 100,left: 20,right: 20 ),
-          child: Column(
-            children: [
-              _searchTextFormField(),
-              SizedBox(height: 40,),
-              CustomText(
-                text: "Categories",
-              ),
-              SizedBox(height: 20,),
-              _listViewCategory(),
-              SizedBox(height: 30,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(top: 100,left: 20,right: 20 ),
+            child: Column(
+              children: [
+                _searchTextFormField(),
+                SizedBox(height: 40,),
                 CustomText(
-                  text:"Best Selling",
-                  fontSize:18,),
-                CustomText(
-                  text: "See all",
-                  fontSize: 18,
+                  text: "Categories",
                 ),
-              //   Logout button can place here
+                SizedBox(height: 20,),
+                _listViewCategory(),
+                SizedBox(height: 30,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                  CustomText(
+                    text:"Best Selling",
+                    fontSize:18,),
+                  CustomText(
+                    text: "See all",
+                    fontSize: 18,
+                  ),
+                //   Logout button can place here
 
+                ],
+                ),
+                SizedBox(height: 25,),
+                _listViewProduct(),
               ],
-              ),
-              SizedBox(height: 25,),
-              _listViewProduct(),
-            ],
+            ),
           ),
         ),
         // body: Center(child: ElevatedButton(onPressed:(){_auth.signOut();Get.offAll(LoginView());} , child: Text("Logout"),),),
@@ -113,48 +116,55 @@ class HomeView extends StatelessWidget{
           itemCount: controller.productModel.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
-            return Container(
-              width: MediaQuery.of(context).size.width *.3,
-              child: Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.grey.shade100,
+            return GestureDetector(
+              onTap: (){
+                Get.to(DetailsView(
+                  model: controller.productModel[index],
+                ));
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width *.3,
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.grey.shade100,
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            height:140,
+                              width: MediaQuery.of(context).size.width *.4,
+                              child: Image.network(controller.productModel[index].image,
+                              fit: BoxFit.fill,
+                              )),
+                        ],
+                      ),
                     ),
-                    child: Column(
-                      children: [
-                        Container(
-                          height:140,
-                            width: MediaQuery.of(context).size.width *.4,
-                            child: Image.network(controller.productModel[index].image,
-                            fit: BoxFit.fill,
-                            )),
-                      ],
+                    CustomText(
+                      text: controller.productModel[index].name,
+                      alignment: Alignment.bottomLeft,
+                      fontSize: 14,
                     ),
-                  ),
-                  CustomText(
-                    text: controller.productModel[index].name,
-                    alignment: Alignment.bottomLeft,
-                    fontSize: 14,
-                  ),
-                  SizedBox(
-                    height: 3,
-                  ),
-                  CustomText(
-                    text: controller.productModel[index].description,
-                    color: Colors.grey,
-                    alignment: Alignment.bottomLeft,
-                    fontSize: 12,
+                    SizedBox(
+                      height: 3,
+                    ),
+                    CustomText(
+                      text: controller.productModel[index].description,
+                      color: Colors.grey,
+                      alignment: Alignment.bottomLeft,
+                      fontSize: 12,
 
-                  ),
-                  CustomText(
-                    text:'Rs '+ controller.productModel[index].price,
-                    alignment: Alignment.bottomLeft,
-                    fontSize: 16,
-                    color: primaryColor,
-                  )
-                ],
+                    ),
+                    CustomText(
+                      text:'Rs '+ controller.productModel[index].price,
+                      alignment: Alignment.bottomLeft,
+                      fontSize: 16,
+                      color: primaryColor,
+                    )
+                  ],
+                ),
               ),
             );
           }, separatorBuilder: ( context, index)=> SizedBox(
