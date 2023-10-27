@@ -27,7 +27,7 @@ class ControlView extends GetWidget<AuthViewModel>{
           BottomNavigationBarItem(
               activeIcon: Padding(
                 padding: const EdgeInsets.only(top: 25.0),
-                child: Text("Explore"),
+                child: Text("Home"),
               ),
               label: '',
               icon: Padding(
